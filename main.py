@@ -1,7 +1,6 @@
-import os
 from tkinter import *
 from docx import Document
-
+import os
 
 # def print_hi(name):
 #     # 在下面的代码行中使用断点来调试脚本。
@@ -12,59 +11,13 @@ from docx import Document
 # if __name__ == '__main__':
 #     print_hi('PyCharm')
 
+# https://www.codegrepper.com/code-examples/python/python+tkinter+text+get
+
 def main():
-    win = Tk()
-    win.title('WeProtect内部系统 Inner Contract Gen System')
-    win.geometry("800x300")
-
-    #  grid label
-    label_name = ['User(用户):', 'UID(用户ID)', 'Date(日期):', 'Address(地址):', 'Currency(货币):', 'City,Zip-code(城市,邮编):',
-                  'Laws of the State(管辖权):', 'Effectiveness(时效(月份)):', 'Days of Notice Ahead(提前几日通知):',
-                  'Compensation(酬劳条款):']
-
-    i = 0
-    for c in label_name:
-        Label(text=c).grid(column=0, row=i)
-        i = i + 1
 
     def focus_next_window(event):
         event.widget.tk_focusNext().focus()
         return "break"
-
-    textbox_name = Text(win, height=1)
-    textbox_name.grid(column=1, row=0)
-    textbox_name.bind("<Tab>", focus_next_window)
-    textbox_uid = Text(win, height=1)
-    textbox_uid.grid(column=1, row=1)
-    textbox_uid.bind("<Tab>", focus_next_window)
-    textbox_date = Text(win, height=1)
-    textbox_date.grid(column=1, row=2)
-    textbox_date.bind("<Tab>", focus_next_window)
-    textbox_addr = Text(win, height=1)
-    textbox_addr.grid(column=1, row=3)
-    textbox_addr.bind("<Tab>", focus_next_window)
-    textbox_curr = Text(win, height=1)
-    textbox_curr.grid(column=1, row=4)
-    textbox_curr.bind("<Tab>", focus_next_window)
-    textbox_city = Text(win, height=1)
-    textbox_city.grid(column=1, row=5)
-    textbox_city.bind("<Tab>", focus_next_window)
-    textbox_laws = Text(win, height=1)
-    textbox_laws.grid(column=1, row=6)
-    textbox_laws.bind("<Tab>", focus_next_window)
-    textbox_effe = Text(win, height=1)
-    textbox_effe.grid(column=1, row=7)
-    textbox_effe.bind("<Tab>", focus_next_window)
-    textbox_noti = Text(win, height=1)
-    textbox_noti.grid(column=1, row=8)
-    textbox_noti.bind("<Tab>", focus_next_window)
-    textbox_comp = Text(win, height=1)
-    textbox_comp.grid(column=1, row=9)
-    textbox_comp.bind("<Tab>", focus_next_window)
-
-    textbox_comp1 = Text(win, height=1)
-    textbox_comp1.grid(column=1, row=10)
-    textbox_comp1.bind("<Tab>", focus_next_window)
 
     def shuttle_text(shuttle):
         t = ''
@@ -134,9 +87,9 @@ def main():
         new_effect = textbox_effe.get("1.0", "end-1c")
         new_notice = textbox_noti.get("1.0", "end-1c")
         new_compen = textbox_comp.get("1.0", "end-1c")
-        new_compen = new_compen + chr(10) + textbox_comp1.get("1.0", "end-1c")
 
         doc_name = user_id
+        password = user_id
 
         print(new_name, new_date, new_addr, new_city, new_laws, new_currency, new_effect, new_notice,
               new_compen + '获取正确!!')
@@ -149,11 +102,58 @@ def main():
         #  todo 客户单号作为后缀
         #  filename = 'Independent_Contractor_Agreement-' + 客户单号 + '.docx'
         filename = 'Independent_Contractor_Agreement_UserID' + doc_name + '.docx'
-        filepath = './' + filename
-        doc.save(filepath)
+        filepath = './'
+        doc.save(filepath + filename)
+
+        #  加密word，密码是user ID
+
+        #  打开word
         os.system('start' + filepath)
 
-    doc = Document('./basefile/Contract.docx')
+    win = Tk()
+    win.title('WeProtect内部系统 Inner Contract Gen System')
+    win.geometry("800x300")
+
+    #  grid label
+    label_name = ['User(用户):', 'UID(用户ID)', 'Date(日期):', 'Address(地址):', 'Currency(货币):', 'City,Zip-code(城市,邮编):',
+                  'Laws of the State(管辖权):', 'Effectiveness(时效(月份)):', 'Days of Notice Ahead(提前几日通知):',
+                  'Compensation(酬劳条款):']
+
+    i = 0
+    for c in label_name:
+        Label(text=c).grid(column=0, row=i)
+        i = i + 1
+
+    textbox_name = Text(win, height=1)
+    textbox_name.grid(column=1, row=0)
+    textbox_name.bind("<Tab>", focus_next_window)
+    textbox_uid = Text(win, height=1)
+    textbox_uid.grid(column=1, row=1)
+    textbox_uid.bind("<Tab>", focus_next_window)
+    textbox_date = Text(win, height=1)
+    textbox_date.grid(column=1, row=2)
+    textbox_date.bind("<Tab>", focus_next_window)
+    textbox_addr = Text(win, height=1)
+    textbox_addr.grid(column=1, row=3)
+    textbox_addr.bind("<Tab>", focus_next_window)
+    textbox_curr = Text(win, height=1)
+    textbox_curr.grid(column=1, row=4)
+    textbox_curr.bind("<Tab>", focus_next_window)
+    textbox_city = Text(win, height=1)
+    textbox_city.grid(column=1, row=5)
+    textbox_city.bind("<Tab>", focus_next_window)
+    textbox_laws = Text(win, height=1)
+    textbox_laws.grid(column=1, row=6)
+    textbox_laws.bind("<Tab>", focus_next_window)
+    textbox_effe = Text(win, height=1)
+    textbox_effe.grid(column=1, row=7)
+    textbox_effe.bind("<Tab>", focus_next_window)
+    textbox_noti = Text(win, height=1)
+    textbox_noti.grid(column=1, row=8)
+    textbox_noti.bind("<Tab>", focus_next_window)
+    textbox_comp = Text(win, height=3)
+    textbox_comp.grid(column=1, row=9)
+    textbox_comp.bind("<Tab>", focus_next_window)
 
     old_date = 'AIdate'
     old_name = 'AIname'
@@ -164,6 +164,8 @@ def main():
     old_effect = 'AIeffect'
     old_notice = 'AInotice'
     old_compen = 'AIcompen'
+
+    doc = Document('./basefile/Contract.docx')
 
     #  word生成 按钮
     # Button(win, text='合同生成', command=word_gen).place(x=90, y=380)
